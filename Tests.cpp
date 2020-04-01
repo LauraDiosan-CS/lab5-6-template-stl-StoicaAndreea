@@ -34,9 +34,21 @@ void Tests::testRepoSTL() {
 	rep.addElem(e3);
 	rep.addElem(e4);   
 	assert(rep.getSize() == 4);
-	//std::list<Car>::iterator it = rep.getAll().begin();
 	assert(rep.getAll().front() == e1);
 	assert(rep.getAll().back() == e4);
+
+	Car carsArray[] = { e1,e2,e3,e4 };
+	list <Car> cars;
+	cars = rep.getAll();
+	list <Car>::iterator it;
+	int i = 0;
+	for (it = cars.begin(); it != cars.end() and i < 4; ++it)
+	{
+		assert(*it == carsArray[i]);
+		//cout << carsArray[i].getName();
+		i++;
+
+	};
 }
 Tests::~Tests() {
 }
