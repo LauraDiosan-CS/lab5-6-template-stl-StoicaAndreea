@@ -35,12 +35,8 @@ void Tests::testRepoSTL() {
 	rep.addElem(e4);   
 	assert(rep.getSize() == 4);
 	//std::list<Car>::iterator it = rep.getAll().begin();
-
-	//assert(it == e1);
-	//assert(rep.getAll().begin() == e1);
-	//assert(rep.getAll()[1] == e2);
-	//assert(rep.getAll()[3] == e3);
-	//assert(rep.getAll()[4] == e4);
+	assert(rep.getAll().front() == e1);
+	assert(rep.getAll().back() == e4);
 }
 Tests::~Tests() {
 }
