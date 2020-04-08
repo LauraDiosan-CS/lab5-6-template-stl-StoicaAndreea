@@ -7,10 +7,11 @@ using namespace std;
 class Service
 {
 private:
+	int max;
 	RepositoryFile repo;
 	//RepositorySTL repo;
 	//RepositoryFile undo[100];
-	//int size = 0;
+	int psize;
 public:
 	Service();
 	Service(const RepositoryFile&);
@@ -22,6 +23,8 @@ public:
 	int findOne(Car);
 	Car getItemFromPos(int);
 	int getSize();
+	int size();
+	void intrare(Car&);
 	//int undoList();
 	~Service();
 };

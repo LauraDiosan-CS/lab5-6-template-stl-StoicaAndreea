@@ -1,4 +1,5 @@
-bbb bbb free
+bbb bbb occupied
 ccc ccc occupied
-ddd ddd free
+ddd ddd occupied
+eee eee free
 bac bac occupied

@@ -9,7 +9,7 @@ Tests::Tests() {
 }
 
 void Tests::testDomain() {
-	Car e1("pppp", "MS 74 SSC","liber");
+	Car e1("pppp", "MS 74 SSC","free");
 	Car e2(e1);
 	Car e3;
 	assert(e3.getName()==NULL);
@@ -24,10 +24,10 @@ void Tests::testDomain() {
 }
 
 void Tests::testRepoSTL() {
-	Car e1("aaa", "MS 74 SSC","liber");
-	Car e2("bbb", "MS 75 SSC","ocupat");
-	Car e3("ccc", "MS 76 SSC", "liber");
-	Car e4("ddd", "MS 77 SSC", "ocupat");
+	Car e1("aaa", "MS 74 SSC","free");
+	Car e2("bbb", "MS 75 SSC","occupied");
+	Car e3("ccc", "MS 76 SSC", "free");
+	Car e4("ddd", "MS 77 SSC", "occupied");
 	RepositorySTL rep;
 	rep.addElem(e1);
 	rep.addElem(e2);
@@ -49,26 +49,26 @@ void Tests::testRepoSTL() {
 		i++;
 
 	}
-	Car e0("eee", "MS 77 SSA", "ocupat");
-	Car e01("bbb", "aaa", "liber");
+	Car e0("eee", "MS 77 SSA", "occupied");
+	Car e01("bbb", "aaa", "free");
 	assert(rep.findElem(e4) == 3);
 	assert(rep.findElem(e0) == -1);
 	rep.deleteElem(e3);
 	assert(rep.findElem(e3) == -1);
 	assert(rep.getSize() == 3);
-	rep.updateElem(e1, "bbb", "aaa", "liber");
+	rep.updateElem(e1, "bbb", "aaa", "free");
 	assert(rep.getItemFromPos(0) == e01);
 }
 
 void Tests::testService() {
 	repof.loadFromFile("servTest.txt");
 	Service serv(repof);
-	Car e1("aaa", "MS 74 SSC", "liber");
-	Car e2("bbb", "MS 75 SSC", "ocupat");
-	Car e3("ccc", "MS 76 SSC", "liber");
-	Car e4("ddd", "MS 77 SSC", "ocupat");
-	Car e0("eee", "MS 77 SSA", "ocupat");
-	Car e01("bbb", "aaa", "liber");
+	Car e1("aaa", "MS 74 SSC", "free");
+	Car e2("bbb", "MS 75 SSC", "occupied");
+	Car e3("ccc", "MS 76 SSC", "free");
+	Car e4("ddd", "MS 77 SSC", "occupied");
+	Car e0("eee", "MS 77 SSA", "occupied");
+	Car e01("bbb", "aaa", "free");
 	serv.addCar(e1);
 	serv.addCar(e2);
 	serv.addCar(e3);
@@ -79,8 +79,13 @@ void Tests::testService() {
 	assert(serv.findOne(e2) == 1);
 	int n = serv.delCar(e0);
 	assert(serv.findOne(e0) == -1);
-	serv.updateCar(e1, "aha", "aaa", "liber");
+	serv.updateCar(e1, "aha", "aaa", "free");
 	assert(strcmp(serv.getItemFromPos(0).getName(), "aha") == 0);
+	
+	
+	//serv.intrare(e1);
+	//assert(strcmp(serv.getItemFromPos(0).getStatus(), "occupied") == 0);
+	
 	//serv.undoList();
 	//assert(strcmp(serv.getItemFromPos(0).getName(), "aaa") == 0);
 	//serv.undoList();

@@ -12,5 +12,6 @@ public:
 	void showAll();
 	//void undoProj();
 	void updateProj();
+	void intra();
 	~UI();
 };

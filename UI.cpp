@@ -11,9 +11,13 @@ void UI::addProj() {
 	Car proj;
 	cout << "Give the Car:";
 	cin >> proj;
-	s.addCar(proj);
-	cout << "the Car has been successfully added" << endl;
+	try {
+		s.addCar(proj);
+		cout << "the Car has been successfully added" << endl;
+	}
+	catch (exception e) { cout << "exception occuredddd!" << "->"; cout << e.what(); }
 }
+
 
 
 void UI::findProj() {
@@ -40,6 +44,20 @@ void UI::showAll() {
 	{
 		cout << s.getItemFromPos(i).getName() << " " << s.getItemFromPos(i).getNumar() << " " << s.getItemFromPos(i).getStatus() << endl;
 	}
+}
+void UI::intra() {
+	cout << s.size() << endl;
+	//cout << max;
+	Car proj;
+	cout << "Give the Car:";
+	cin >> proj;
+	try {
+		s.intrare(proj);
+	}
+	catch (exception e) {
+		cout << "exception occuredddd!" << "->"; cout << e.what();
+	}
+
 }
 /*
 void UI::undoProj() {
@@ -88,6 +106,7 @@ void UI::showUI()
 		cout << "	3. Delete Car " << endl;
 		cout << "	4. Update Car " << endl;
 		cout << "	5. Show Cars " << endl;
+		cout << "	6. Get in the parking lot" << endl;
 		//cout << "	6. UNDO" << endl;
 		cout << "	0. EXIT!" << endl;
 		cout << "option: (give the number):  ";
@@ -101,6 +120,7 @@ void UI::showUI()
 		case 3: {delProj(); break; }
 		case 4: {updateProj(); break; }
 		case 5: {showAll(); break; }
+		case 6: {intra(); break; }
 		//case 6: {undoProj(); break; }
 		case 0: {gata = true; cout << "BYE BYE..." << endl; }
 		}

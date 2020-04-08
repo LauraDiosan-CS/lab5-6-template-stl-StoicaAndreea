@@ -1,11 +1,6 @@
 ﻿  App.cpp
-  RepoFile.cpp
-  RepoSTL.cpp
-C:\Users\Andreea\source\repos\lab 6-7\lab 6-7\RepoSTL.cpp(36,18): warning C4018: '>': signed/unsigned mismatch
   Service.cpp
-  TestFile.cpp
   Tests.cpp
   UI.cpp
   Generating Code...
-C:\Users\Andreea\source\repos\lab 6-7\lab 6-7\RepoSTL.cpp(41): warning C4715: 'RepositorySTL::getItemFromPos': not all control paths return a value
   lab 6-7.vcxproj -> C:\Users\Andreea\source\repos\lab 6-7\Debug\lab 6-7.exe

@@ -3,27 +3,38 @@
 
 Service::Service()
 {
-	//size = 0;
+	max = 4;
+	psize = 0;
 }
 
 Service::Service(const RepositoryFile& r)
 {
+	max = 4;
 	repo = r;
-	//size = 0;
+	psize = 0;
 }
 
 void Service::setRepo(const RepositoryFile& r)
 {
 	repo = r;
-	//size = 0;
+	psize = 0;
 }
 
 
 void Service::addCar(Car& p)
 {
 	//undo[size++] = repo;
+	list<Car> el;
+	el = repo.getAll();
+	list<Car>::iterator it;
+	for (it = el.begin(); it != el.end(); ++it) {
+		if (strcmp((*it).getNumar(), p.getNumar()) == 0) {
+			throw exception("duplicate car");
+		}
+	}
 	repo.addElem(p);
 	repo.saveToFile();
+	
 }
 
 int Service::delCar(Car& p)
@@ -63,6 +74,42 @@ Car Service::getItemFromPos(int i) {
 
 int Service::getSize() {
 	return repo.getSize();
+}
+int Service::size() {
+	psize = 0;
+	list<Car> el;
+	el = repo.getAll();
+	list<Car>::iterator it;
+	for (it = el.begin(); it != el.end(); ++it) {
+		if (strcmp((*it).getStatus(), "occupied")==0) {
+			psize++;
+		}
+	}
+	return psize;
+}
+void Service::intrare(Car& c) {
+	list<Car> el;
+	el = repo.getAll();
+	list<Car>::iterator it;
+	int ok = 0;
+	for (it = el.begin(); it != el.end(); ++it) 
+	{
+		if (strcmp((*it).getNumar(), c.getNumar()) == 0) 
+		{
+			ok++;
+		}
+	}
+	if (ok == 0) {
+		throw exception("car not found in repo");
+	}
+	if (strcmp(c.getStatus(), "occupied") == 0) {
+		throw exception("cannot enter the parking lot because the car is in the parking lot");
+	}
+	psize =size();
+	if (max == psize){ throw exception("cannot enter the parking lot because it is full"); }
+	
+	repo.updateElem(c, c.getName(), c.getNumar(), "occupied");
+	repo.saveToFile();
 }
 /*
 int Service::undoList() {
