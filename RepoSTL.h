@@ -5,15 +5,15 @@
 using namespace std;
 
 class RepositorySTL {
-private:
+protected:
 	list<Car> elem;
 public:
 	RepositorySTL();
 	void addElem(Car);
-	//bool findElem(int);
-	//void deleteElem(Entity);
-	//void updateElem(Entity, const char*, int);
-	//Car getItemFromPos(int);
+	int findElem(Car);
+	int deleteElem(Car);
+	void updateElem(Car, const char*, const char*, const char*);
+	Car getItemFromPos(int);
 	list<Car>getAll();
 	int getSize();
 	~RepositorySTL();

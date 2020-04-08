@@ -1,0 +1,4 @@
+bbb bbb free
+ccc ccc occupied
+ddd ddd free
+bac bac occupied

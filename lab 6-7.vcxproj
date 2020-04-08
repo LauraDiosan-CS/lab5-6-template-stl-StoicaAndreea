@@ -140,17 +140,26 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="RepoFile.cpp" />
     <ClCompile Include="RepoSTL.cpp" />
     <ClCompile Include="Service.cpp" />
+    <ClCompile Include="TestFile.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="RepoFile.h" />
     <ClInclude Include="RepoSTL.h" />
     <ClInclude Include="Service.h" />
+    <ClInclude Include="TestFile.h" />
     <ClInclude Include="Tests.h" />
     <ClInclude Include="UI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Elem.txt" />
+    <Text Include="servTest.txt" />
+    <Text Include="TestProj.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

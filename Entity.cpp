@@ -137,7 +137,14 @@ istream& operator >>(istream& is, Car& e) {
 	is >> numar;
 	cout << "Give the status: ";
 	char* status = new char[10];
-	is >> status;
+	int ok = 0;
+	while (ok == 0) {
+		cout << "status: "<<endl;
+		cout << "			a. free"<<endl;
+		cout << "			b.occupied" << endl;;
+		is >> status;
+		if ((strcmp(status, "free") == 0) or (strcmp(status, "occupied")==0)) ok = 1;
+	}
 	e.setName(name);
 	e.setNumar(numar);
 	e.setStatus(status);
