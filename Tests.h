@@ -1,15 +1,15 @@
 #pragma once
-#include"RepoSTL.h"
+#include"RepoTemplate.h"
 #include"Service.h"
 class Tests {
 private:
 	RepositoryFile repof;
-	RepositorySTL repo;
+	RepositoryTemplate<Car> repo;
 	Service serv;
 public:
 	Tests();
 	void testDomain();
-	void testRepoSTL();
+	void testRepoTemplate();
 	void testService();
 	~Tests();
 };

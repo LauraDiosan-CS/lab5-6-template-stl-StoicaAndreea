@@ -1,5 +1,5 @@
 #include"Tests.h"
-#include"RepoSTL.h"
+#include"RepoTemplate.h"
 #include"Service.h"
 #include"UI.h"
 #include"TestFile.h"
@@ -7,7 +7,7 @@ int main() {
 	cout << "start" << endl;
 	Tests test;
 	test.testDomain();
-	test.testRepoSTL();
+	//test.testRepoSTL();
 	test.testService();
 	//########repo file tests################
 	TestRepositoryFile testf;

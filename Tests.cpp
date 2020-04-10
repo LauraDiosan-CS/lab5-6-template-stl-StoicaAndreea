@@ -23,12 +23,12 @@ void Tests::testDomain() {
 	assert(strcmp(e2.getNumar(), "MS 74 AAA") == 0);
 }
 
-void Tests::testRepoSTL() {
+void Tests::testRepoTemplate() {
 	Car e1("aaa", "MS 74 SSC","free");
 	Car e2("bbb", "MS 75 SSC","occupied");
 	Car e3("ccc", "MS 76 SSC", "free");
 	Car e4("ddd", "MS 77 SSC", "occupied");
-	RepositorySTL rep;
+	RepositoryTemplate<Car> rep;
 	rep.addElem(e1);
 	rep.addElem(e2);
 	rep.addElem(e3);
@@ -56,7 +56,8 @@ void Tests::testRepoSTL() {
 	rep.deleteElem(e3);
 	assert(rep.findElem(e3) == -1);
 	assert(rep.getSize() == 3);
-	rep.updateElem(e1, "bbb", "aaa", "free");
+	Car e("bbb", "aaa", "free");
+	rep.updateElem(e1, e);
 	assert(rep.getItemFromPos(0) == e01);
 }
 
@@ -66,7 +67,7 @@ void Tests::testService() {
 	Car e1("aaa", "MS 74 SSC", "free");
 	Car e2("bbb", "MS 75 SSC", "occupied");
 	Car e3("ccc", "MS 76 SSC", "free");
-	Car e4("ddd", "MS 77 SSC", "occupied");
+	Car e4("ddd", "MS 77 SSC", "free");
 	Car e0("eee", "MS 77 SSA", "occupied");
 	Car e01("bbb", "aaa", "free");
 	serv.addCar(e1);
@@ -76,16 +77,26 @@ void Tests::testService() {
 	serv.addCar(e0);
 	assert(serv.getSize() == 5);
 	assert(serv.getItemFromPos(0) == e1);
-	assert(serv.findOne(e2) == 1);
+	assert(serv.findElem(e2) == 1);
 	int n = serv.delCar(e0);
-	assert(serv.findOne(e0) == -1);
+	assert(serv.findElem(e0) == -1);
 	serv.updateCar(e1, "aha", "aaa", "free");
-	assert(strcmp(serv.getItemFromPos(0).getName(), "aha") == 0);
-	
-	
-	//serv.intrare(e1);
-	//assert(strcmp(serv.getItemFromPos(0).getStatus(), "occupied") == 0);
-	
+	assert(strcmp(serv.getItemFromPos(0).getStatus(), "free") == 0);
+	Car e("aha", "aaa", "free");
+	try {
+		serv.intrare(e);
+		assert(strcmp(serv.getItemFromPos(0).getStatus(), "occupied") == 0);
+		serv.intrare(e3);
+		serv.intrare(e4);
+	}
+	catch (exception e) { cout << endl; }
+	e.setStatus("occupied");
+	try {
+		serv.iesire(e);
+		assert(strcmp(serv.getItemFromPos(0).getStatus(), "free") == 0);
+	}
+	catch (exception e) { cout << endl; }
+	assert(serv.maxCars() == 1);
 	//serv.undoList();
 	//assert(strcmp(serv.getItemFromPos(0).getName(), "aaa") == 0);
 	//serv.undoList();

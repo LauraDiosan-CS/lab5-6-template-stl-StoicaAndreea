@@ -13,5 +13,6 @@ public:
 	//void undoProj();
 	void updateProj();
 	void intra();
+	void iesi();
 	~UI();
 };

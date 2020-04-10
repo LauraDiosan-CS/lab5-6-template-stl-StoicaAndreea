@@ -1,4 +1,0 @@
-aha aaa free
-bbb MS 75 SSC occupied
-ccc MS 76 SSC free
-ddd MS 77 SSC occupied

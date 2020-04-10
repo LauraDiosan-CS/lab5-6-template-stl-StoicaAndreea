@@ -24,7 +24,7 @@ void UI::findProj() {
 	Car proj;
 	cout << "Give the Car:";
 	cin >> proj;
-	int rez = s.findOne(proj);
+	int rez = s.findElem(proj);
 	if (rez >= 0) cout << "The Car has been found!" << endl;
 	else cout << "The Car has not been found!" << endl;
 }
@@ -33,9 +33,11 @@ void UI::delProj() {
 	Car proj;
 	cout << "Give the Car:" << endl;;
 	cin >> proj;
-	int rez = s.delCar(proj);
-	if (rez == 0) cout << "the Car has been deleted!" << endl;
-	else cout << "the Car has not been found!" << endl;
+	try {
+		int rez = s.delCar(proj);
+		if (rez == 0) cout << "the Car has been deleted!" << endl;
+	}
+	catch (exception e) { cout << "exception occuredddd!" << "->"; cout << e.what(); }
 }
 
 void UI::showAll() {
@@ -48,16 +50,60 @@ void UI::showAll() {
 void UI::intra() {
 	cout << s.size() << endl;
 	//cout << max;
-	Car proj;
-	cout << "Give the Car:";
-	cin >> proj;
-	try {
-		s.intrare(proj);
-	}
-	catch (exception e) {
-		cout << "exception occuredddd!" << "->"; cout << e.what();
-	}
+	//Car proj;
+	//cout << "Give the Car:";
+	//cin >> proj;
+	char* c = new char[10];
+	cout << "give the plate number:  ";
+	cin >> c;
+	list<Car> el = s.getAll();
+	list<Car>::iterator it;
+	int ok = 0;
+	for (it = el.begin(); it != el.end(); ++it)
+	{
+		if (strcmp((*it).getNumar(), c) == 0)
+		{
 
+			ok++;
+			try {
+				s.intrare(*it);
+			}
+			catch (exception e) {
+				cout << "exception occuredddd!" << "->"; cout << e.what();
+			}
+		}
+	}
+	if (ok == 0) cout << "the car is not in the repo";
+	delete[] c;
+}
+void UI::iesi() {
+	cout << s.size() << endl;
+	//cout << max;
+	//Car proj;
+	//cout << "Give the Car:";
+	//cin >> proj;
+	char* c = new char[10];
+	cout << "give the plate number:  ";
+	cin >> c;
+	list<Car> el = s.getAll();
+	list<Car>::iterator it;
+	int ok = 0;
+	for (it = el.begin(); it != el.end(); ++it)
+	{
+		if (strcmp((*it).getNumar(), c) == 0)
+		{
+
+			ok++;
+			try {
+				s.iesire(*it);
+			}
+			catch (exception e) {
+				cout << "exception occuredddd!" << "->"; cout << e.what();
+			}
+		}
+	}
+	if (ok == 0) cout << "the car is not in the repo";
+	delete[] c;
 }
 /*
 void UI::undoProj() {
@@ -73,7 +119,7 @@ void UI::updateProj() {
 	char* na = new char[10];
 	char* nr=new char[10];
 	char* st=new char[10];
-	int rez = s.findOne(proj);
+	int rez = s.findElem(proj);
 	if (rez >= 0) {
 		cout << "name: ";
 		cin >> na;
@@ -91,6 +137,9 @@ void UI::updateProj() {
 		cout << "The Car has been updated!";
 	}
 	else { cout << "The Car has not been found!"; }
+	delete[] na;
+	delete[] nr;
+	delete[] st;
 }
 
 void UI::showUI()
@@ -107,6 +156,8 @@ void UI::showUI()
 		cout << "	4. Update Car " << endl;
 		cout << "	5. Show Cars " << endl;
 		cout << "	6. Get in the parking lot" << endl;
+		cout << "	7. Leave the parking lot" << endl;
+		cout << "	8. Max cars that tried to enter" << endl;
 		//cout << "	6. UNDO" << endl;
 		cout << "	0. EXIT!" << endl;
 		cout << "option: (give the number):  ";
@@ -121,6 +172,8 @@ void UI::showUI()
 		case 4: {updateProj(); break; }
 		case 5: {showAll(); break; }
 		case 6: {intra(); break; }
+		case 7: {iesi(); break; }
+		case 8: {cout << "MAX cars : " << s.maxCars() << endl; }
 		//case 6: {undoProj(); break; }
 		case 0: {gata = true; cout << "BYE BYE..." << endl; }
 		}

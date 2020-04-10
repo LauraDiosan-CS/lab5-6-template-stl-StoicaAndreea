@@ -18,7 +18,7 @@ void TestRepositoryFile::testLoadFromFile()
 void TestRepositoryFile::testAddElem()
 {
 	repo.loadFromFile("TestProj.txt");
-	repo.addElem(Car("aaa","aaa","free"));
+	repo.addElem(Car("aaa","bbb","free"));
 	assert(repo.getSize() == 5);
 	repo.saveToFile();
 }
@@ -26,7 +26,7 @@ void TestRepositoryFile::testAddElem()
 void TestRepositoryFile::testFindElem()
 {
 	repo.loadFromFile("TestProj.txt");
-	assert(repo.findElem(Car("aaa", "aaa", "free")) == 4);
+	assert(repo.findElem(Car("aaa", "bbb", "free")) == 4);
 	assert(repo.findElem(Car("abc", "aaa", "free")) == -1);
 	repo.saveToFile();
 }
@@ -34,7 +34,7 @@ void TestRepositoryFile::testFindElem()
 void TestRepositoryFile::testDelElem()
 {
 	repo.loadFromFile("TestProj.txt");
-	repo.deleteElem(Car("aaa", "aaa", "free"));
+	repo.deleteElem(Car("aaa", "bbb", "free"));
 	assert(repo.getSize() == 4);
 	repo.saveToFile();
 }

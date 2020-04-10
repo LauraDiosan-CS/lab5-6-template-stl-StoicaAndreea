@@ -3,21 +3,26 @@
 
 Service::Service()
 {
-	max = 4;
+	max = 3;
 	psize = 0;
+	maxc = 0;
+	cars = 0;
 }
 
 Service::Service(const RepositoryFile& r)
 {
-	max = 4;
+	max = 3;
 	repo = r;
 	psize = 0;
+	maxc = 0;
+	cars = 0;
 }
 
 void Service::setRepo(const RepositoryFile& r)
 {
 	repo = r;
 	psize = 0;
+	cars = 0;
 }
 
 
@@ -34,16 +39,21 @@ void Service::addCar(Car& p)
 	}
 	repo.addElem(p);
 	repo.saveToFile();
-	
 }
 
 int Service::delCar(Car& p)
 {
-	if (findOne(p) != -1) {
+	if (findElem(p) == -1) {
+		throw exception("the car does not exist");
+	}
 		//undo[size++] = repo;
-		repo.deleteElem(p);
-		repo.saveToFile();
-		return 0;
+	else{
+		if (strcmp(p.getNumar(), "occupied")==0){ throw exception("cannot delete a car from the parking lot"); }
+		else {
+			repo.deleteElem(p);
+			repo.saveToFile();
+			return 0;
+		}
 	}
 	return -1;
 }
@@ -61,7 +71,7 @@ Car Service::updateCar(Car p, const char* na, const char* nu, const char* st)
 	return p;
 }
 
-int Service::findOne(Car p)
+int Service::findElem(Car p)
 {
 	return repo.findElem(p);
 }
@@ -87,7 +97,7 @@ int Service::size() {
 	}
 	return psize;
 }
-void Service::intrare(Car& c) {
+void Service::intrare(Car & c) {
 	list<Car> el;
 	el = repo.getAll();
 	list<Car>::iterator it;
@@ -106,10 +116,39 @@ void Service::intrare(Car& c) {
 		throw exception("cannot enter the parking lot because the car is in the parking lot");
 	}
 	psize =size();
-	if (max == psize){ throw exception("cannot enter the parking lot because it is full"); }
+	if (max == psize){
+		cars++;
+		throw exception("cannot enter the parking lot because it is full"); }
 	
 	repo.updateElem(c, c.getName(), c.getNumar(), "occupied");
 	repo.saveToFile();
+}
+
+void Service::iesire(Car& c) {
+	list<Car> el;
+	el = repo.getAll();
+	list<Car>::iterator it;
+	int ok = 0;
+	for (it = el.begin(); it != el.end(); ++it)
+	{
+		if (strcmp((*it).getNumar(),c.getNumar()) == 0)
+		{
+			ok++;
+		}
+	}
+	if (ok == 0) {
+		throw exception("car not found in repo");
+	}
+	if (strcmp(c.getStatus(), "free") == 0) {
+		throw exception("cannot exit the parking lot because the car is not in the parking lot");
+	}
+	if (cars > maxc) { maxc = cars; }
+	cars=0;
+	repo.updateElem(c, c.getName(), c.getNumar(), "free");
+	repo.saveToFile();
+}
+int Service::maxCars() {
+	return maxc;
 }
 /*
 int Service::undoList() {
