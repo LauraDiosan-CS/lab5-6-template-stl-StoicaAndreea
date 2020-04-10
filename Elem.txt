@@ -2,4 +2,3 @@ bbb bbb free
 ccc ccc occupied
 ddd ddd free
 eee eee free
-bac bac occupied

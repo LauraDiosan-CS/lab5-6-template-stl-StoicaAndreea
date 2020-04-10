@@ -48,7 +48,7 @@ int Service::delCar(Car& p)
 	}
 		//undo[size++] = repo;
 	else{
-		if (strcmp(p.getNumar(), "occupied")==0){ throw exception("cannot delete a car from the parking lot"); }
+		if (strcmp(p.getStatus(), "occupied")==0){ throw exception("cannot delete a car from the parking lot"); }
 		else {
 			repo.deleteElem(p);
 			repo.saveToFile();

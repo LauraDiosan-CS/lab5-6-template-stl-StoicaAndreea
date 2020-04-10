@@ -68,7 +68,7 @@ void Tests::testService() {
 	Car e2("bbb", "MS 75 SSC", "occupied");
 	Car e3("ccc", "MS 76 SSC", "free");
 	Car e4("ddd", "MS 77 SSC", "free");
-	Car e0("eee", "MS 77 SSA", "occupied");
+	Car e0("eee", "MS 77 SSA", "free");
 	Car e01("bbb", "aaa", "free");
 	serv.addCar(e1);
 	serv.addCar(e2);
