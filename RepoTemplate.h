@@ -31,13 +31,14 @@ protected:
 	list<T> elem;
 public:
 	RepositoryTemplate<T>() {}
-	int addElem(const T&);
-	int deleteElem(const T&);
+	virtual int addElem(const T&);
+	virtual int deleteElem(const T&);
 	int findElem(const T&);
 	int getSize();
-	void updateElem(const T& s, const T nou);
+	virtual void updateElem(const T& s, const T nou);
 	list<T> getAll();
 	T getItemFromPos(int);
+	void clearElem();
 	~RepositoryTemplate();
 };
 
@@ -120,7 +121,9 @@ T RepositoryTemplate<T>::getItemFromPos(int i) {
 
 	}
 }
-
+template<class T> void RepositoryTemplate<T>::clearElem() {
+	elem.clear();
+}
 template <class T> RepositoryTemplate<T>::~RepositoryTemplate()
 {
 }

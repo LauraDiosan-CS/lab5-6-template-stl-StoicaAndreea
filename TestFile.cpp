@@ -50,7 +50,7 @@ void TestRepositoryFile::testGetAll()
 void TestRepositoryFile::testUpdateElem()
 {
 	repo.loadFromFile("TestProj.txt");
-	repo.updateElem(Car("bbb", "aaa", "free"), "abc", "aaa", "free");
+	repo.updateElem(Car("bbb", "aaa", "free"), Car("abc", "aaa", "free"));
 	assert(repo.findElem(Car("abc", "aaa", "free")) == 0);
 	repo.saveToFile();
 }

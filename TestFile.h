@@ -3,7 +3,7 @@
 class TestRepositoryFile
 {
 private:
-	RepositoryFile repo;
+	RepositoryFile<Car> repo;
 public:
 	TestRepositoryFile();
 	void testLoadFromFile();

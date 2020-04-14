@@ -1,4 +1,7 @@
 bbb bbb free
 ccc ccc occupied
 ddd ddd free
-eee eee free
+eee eee occupied
+aaa aaa occupied
+aua aua occupied
+sss sss free

@@ -4,7 +4,7 @@ class UI {
 private:
 	Service s;
 public:
-	UI(Service& s);
+	UI(Service& serv) : s(serv) {};
 	void addProj();
 	void findProj();
 	void showUI();
@@ -14,5 +14,6 @@ public:
 	void updateProj();
 	void intra();
 	void iesi();
+	void set();
 	~UI();
 };

@@ -7,18 +7,18 @@ using namespace std;
 class Service
 {
 private:
-	int max;
-	RepositoryFile repo;
-	//RepositoryTemplate repo;
+	//RepositoryFile repo;
+	RepositoryTemplate<Car> &repo;
 	//RepositoryFile undo[100];
 	int psize;
 	int maxc;
 	int cars;
 public:
-	Service();
+	int max;
+	//Service();
 	//Service(const RepoTemplate<Car>&);
-	Service(const RepositoryFile&);
-	void setRepo(const RepositoryFile&);
+	Service(RepositoryTemplate<Car>& r) :repo(r) { repo = r; max = 3;psize = 0;maxc = 0;cars = 0; };
+	//void setRepo(const RepositoryTemplate<Car>&);
 	void addCar(Car&);
 	int delCar(Car&);
 	list<Car> getAll();
@@ -30,6 +30,7 @@ public:
 	void intrare(Car &);
 	void iesire(Car &);
 	int maxCars();
+	void setMax(int);
 	//int undoList();
 	~Service();
 };

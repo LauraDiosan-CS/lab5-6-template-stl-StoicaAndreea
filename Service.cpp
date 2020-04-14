@@ -1,29 +1,29 @@
 #include "Service.h"
 //#include <algorithm> 
 
-Service::Service()
-{
-	max = 3;
-	psize = 0;
-	maxc = 0;
-	cars = 0;
-}
+//Service::Service()
+//{
+//	max = 3;
+//	psize = 0;
+//	maxc = 0;
+//	cars = 0;
+//}
 
-Service::Service(const RepositoryFile& r)
-{
-	max = 3;
-	repo = r;
-	psize = 0;
-	maxc = 0;
-	cars = 0;
-}
+//Service::Service(const RepositoryTemplate<Car>& r)
+//{
+//	max = 3;
+//	repo = r;
+//	psize = 0;
+//	maxc = 0;
+//	cars = 0;
+//}
 
-void Service::setRepo(const RepositoryFile& r)
-{
-	repo = r;
-	psize = 0;
-	cars = 0;
-}
+//void Service::setRepo(const RepositoryTemplate<Car>& r)
+//{
+//	repo = r;
+//	psize = 0;
+//	cars = 0;
+//}
 
 
 void Service::addCar(Car& p)
@@ -37,8 +37,11 @@ void Service::addCar(Car& p)
 			throw exception("duplicate car");
 		}
 	}
+	psize = size();
+	if (strcmp(p.getStatus(), "occupied")==0 and max == psize) {
+				throw exception("cannot enter the parking lot because it is full");
+		}
 	repo.addElem(p);
-	repo.saveToFile();
 }
 
 int Service::delCar(Car& p)
@@ -51,7 +54,6 @@ int Service::delCar(Car& p)
 		if (strcmp(p.getStatus(), "occupied")==0){ throw exception("cannot delete a car from the parking lot"); }
 		else {
 			repo.deleteElem(p);
-			repo.saveToFile();
 			return 0;
 		}
 	}
@@ -66,8 +68,8 @@ list<Car> Service::getAll()
 Car Service::updateCar(Car p, const char* na, const char* nu, const char* st)
 {
 	//undo[size++] = repo;
-	repo.updateElem(p, na,nu, st);
-	repo.saveToFile();
+	Car c(na, nu, st);
+	repo.updateElem(p, c);
 	return p;
 }
 
@@ -119,9 +121,8 @@ void Service::intrare(Car & c) {
 	if (max == psize){
 		cars++;
 		throw exception("cannot enter the parking lot because it is full"); }
-	
-	repo.updateElem(c, c.getName(), c.getNumar(), "occupied");
-	repo.saveToFile();
+	Car newc(c.getName(), c.getNumar(), "occupied");
+	repo.updateElem(c,newc);
 }
 
 void Service::iesire(Car& c) {
@@ -144,11 +145,22 @@ void Service::iesire(Car& c) {
 	}
 	if (cars > maxc) { maxc = cars; }
 	cars=0;
-	repo.updateElem(c, c.getName(), c.getNumar(), "free");
-	repo.saveToFile();
+	Car newc(c.getName(), c.getNumar(), "free");
+	repo.updateElem(c, newc);
 }
 int Service::maxCars() {
 	return maxc;
+}
+void Service::setMax(int i)
+{
+	cout << max << endl;
+	if (i > size())
+		throw exception("nu se poate mai mare");
+	else
+	{
+		max = i; 
+		cout << max << endl;
+	}
 }
 /*
 int Service::undoList() {

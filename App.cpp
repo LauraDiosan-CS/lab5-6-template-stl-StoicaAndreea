@@ -7,7 +7,7 @@ int main() {
 	cout << "start" << endl;
 	Tests test;
 	test.testDomain();
-	//test.testRepoSTL();
+	test.testRepoTemplate();
 	test.testService();
 	//########repo file tests################
 	TestRepositoryFile testf;
@@ -20,8 +20,8 @@ int main() {
 	testf.testElemAtPos();
 	testf.testSize();
 	cout << "succes" << endl;
-	//RepositorySTL repo;
-	RepositoryFile repo("Elem.txt");
+	//RepositoryTemplate<Car> rep;
+	RepositoryFile<Car> repo("Elem.txt");
 	Service serv(repo);
 	UI ui(serv);
 	ui.showUI();

@@ -3,9 +3,9 @@
 #include"Service.h"
 class Tests {
 private:
-	RepositoryFile repof;
+	//RepositoryFile<Car> repof;
 	RepositoryTemplate<Car> repo;
-	Service serv;
+	//Service serv();
 public:
 	Tests();
 	void testDomain();

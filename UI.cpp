@@ -3,10 +3,6 @@
 #include<string.h>
 using namespace std;
 
-UI::UI(Service& service)
-{
-	s = service;
-}
 void UI::addProj() {
 	Car proj;
 	cout << "Give the Car:";
@@ -158,6 +154,7 @@ void UI::showUI()
 		cout << "	6. Get in the parking lot" << endl;
 		cout << "	7. Leave the parking lot" << endl;
 		cout << "	8. Max cars that tried to enter" << endl;
+		cout << "	9. Set max" << endl;
 		//cout << "	6. UNDO" << endl;
 		cout << "	0. EXIT!" << endl;
 		cout << "option: (give the number):  ";
@@ -173,8 +170,9 @@ void UI::showUI()
 		case 5: {showAll(); break; }
 		case 6: {intra(); break; }
 		case 7: {iesi(); break; }
-		case 8: {cout << "MAX cars : " << s.maxCars() << endl; }
-		//case 6: {undoProj(); break; }
+		case 8: {cout << "MAX cars : " << s.maxCars() << endl; break; }
+		case 9: {cout << "give the max: "; int i; cin >> i; try { s.setMax(i); } catch (exception e) { cout << "exception occuredddd!" << "->"; cout << e.what(); } break; }
+			  //case 6: {undoProj(); break; }
 		case 0: {gata = true; cout << "BYE BYE..." << endl; }
 		}
 	}

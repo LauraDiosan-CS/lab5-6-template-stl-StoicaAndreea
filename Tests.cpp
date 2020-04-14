@@ -4,7 +4,6 @@
 #include<string.h>
 #include <vector>
 using namespace std;
-
 Tests::Tests() {
 }
 
@@ -62,7 +61,8 @@ void Tests::testRepoTemplate() {
 }
 
 void Tests::testService() {
-	repof.loadFromFile("servTest.txt");
+	RepositoryFile<Car> repof("servTest.txt");
+	//repof.loadFromFile("servTest.txt");
 	Service serv(repof);
 	Car e1("aaa", "MS 74 SSC", "free");
 	Car e2("bbb", "MS 75 SSC", "occupied");

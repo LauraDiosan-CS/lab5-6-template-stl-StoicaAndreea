@@ -1,174 +1,107 @@
-//#include "stdafx.h"
-#include "RepoFile.h"
-#include <fstream>
-#include <string>
-using namespace std;
-
-RepositoryFile::RepositoryFile():RepositoryTemplate<Car>()
-{
-	fis = "";
-}
-
-RepositoryFile::RepositoryFile(const char* fileName) : RepositoryTemplate()
-{
-	fis = fileName;
-	ifstream f(fileName);
-	string linie;
-	char* name = new char[10];
-	char* numar=new char[10];
-	char* status=new char[10];
-	while (!f.eof()) {
-		f >> name >> numar >> status;
-		if (name != "") {
-			Car e(name, numar, status);
-			elem.push_back(e);
-		}
-	}
-	delete[] name;
-	delete[] numar;
-	delete[] status;
-	f.close();
-}
-
-void RepositoryFile::loadFromFile(const char* fileName)
-{
-	elem.clear();
-	fis = fileName;
-	ifstream f(fileName);
-	char* name = new char[10];
-	char* numar = new char[10];
-	char* status = new char[10];
-	while (!f.eof()) 
-	{
-		f >> name >> numar >> status;
-		if (strcmp(name, "") != 0)
-		{
-			Car e(name, numar, status);
-			elem.push_back(e);
-		}
-	}
-	delete[] name;
-	delete[] numar;
-	delete[] status;
-	f.close();
-}
-void RepositoryFile::saveToFile()
-	{
-		ofstream f(fis);
-		list<Car>::iterator it;
-		for (it = elem.begin(); it != elem.end(); ++it)
-		{
-			f << *it;
-		}
-		f.close();
-	}
-RepositoryFile::~RepositoryFile()
-{
-
-}
-
-
-int RepositoryFile::addElem(Car c) {
-	list<Car>::iterator it;
-	int ok = 1;
-	for (it = elem.begin(); it != elem.end(); it++)
-		if (strcmp((*it).getNumar(), c.getNumar()) == 0)
-			ok = 0;
-	it = find(elem.begin(), elem.end(), c);
-	if (it == elem.end() and ok == 1)
-	{
-		elem.push_back(c);
-		saveToFile();
-		return 1;
-	}
-	return 0;
-}
-
-int RepositoryFile::deleteElem(Car c) {
-	list<Car>::iterator it;
-	it = find(elem.begin(), elem.end(), c);
-	if (it != elem.end())
-	{
-		elem.erase(it);
-		saveToFile();
-		return 0;
-	}
-	else
-		return -1;
-}
-void RepositoryFile::updateElem(Car e, const char* na, const char* nu, const char* st)
-{
-	int i = findElem(e);
-	if (i != -1) {
-		std::list<Car>::iterator it = std::next(elem.begin(), i);
-		it->setName(na);
-		it->setNumar(nu);
-		it->setStatus(st);
-		}
-	saveToFile();
-}
-///*
-//void RepositoryFile::addElem(Car e)
+#include"RepoFile.h"
+//#include<iostream>
+//#include <fstream>
+//#include <cstddef>
+//#include <string>
+//using namespace std;
+//
+//template<class T>
+//RepositoryFile<T>::RepositoryFile():RepositoryTemplate<Car>()
 //{
-//	elem.push_back(e);
+//	fis = "";
 //}
-//
-//void RepositoryFile::updateElem(Car e, const char* na, const char* nu, const char* st)
+//template<class T>
+//RepositoryFile<T>::RepositoryFile(const char* fileName)
 //{
-//	int i = findElem(e);
-//	if (i != -1) {
-//		std::list<Car>::iterator it = std::next(elem.begin(), i);
-//		it->setName(na);
-//		it->setNumar(nu);
-//		it->setStatus(st);
+//	fis = fileName;
+//	ifstream f(fileName);
+//	string linie;
+//	char* name = new char[10];
+//	char* numar=new char[10];
+//	char* status=new char[10];
+//	while (!f.eof()) {
+//		f >> name >> numar >> status;
+//		if (name != "") {
+//			Car e(name, numar, status);
+//			//elem.push_back(e);
+//			RepositoryTemplate::addElem(e);
 //
-//	}
-//
-//}
-//
-//int RepositoryFile::findElem(Car e)
-//{
-//	list<Car>::iterator it;
-//	int i = 0;
-//	for (it = elem.begin(); it != elem.end(); ++it)
-//	{
-//		if (*it == e)
-//		{
-//			return i;
 //		}
-//		i++;
 //	}
-//	return -1;
+//	delete[] name;
+//	delete[] numar;
+//	delete[] status;
+//	f.close();
 //}
 //
-//sterge elementul e din repository, returneaza 0 la succes, -1 altfel
-//int RepositoryFile::deleteElem(Car e)
+//template<class T>
+//void RepositoryFile<T>::loadFromFile(const char* fileName)
 //{
-//	int i = findElem(e);
-//	if (i != -1)
+//	//elem.clear();
+//	RepositoryTemplate::clearElem();
+//	fis = fileName;
+//	ifstream f(fileName);
+//	char* name = new char[10];
+//	char* numar = new char[10];
+//	char* status = new char[10];
+//	while (!f.eof()) 
 //	{
-//		std::list<Car>::iterator it = std::next(elem.begin(), i);
-//		elem.erase(it);
+//		f >> name >> numar >> status;
+//		if (strcmp(name, "") != 0)
+//		{
+//			Car e(name, numar, status);
+//			//elem.push_back(e);
+//			RepositoryTemplate::addElem(e);
+//		}
+//	}
+//	delete[] name;
+//	delete[] numar;
+//	delete[] status;
+//	f.close();
+//}
+//
+//template<class T>
+//void RepositoryFile<T>::saveToFile()
+//	{
+//		ofstream f(fis);
+//		list<Car>::iterator it;
+//		list<Car>elem = RepositoryTemplate::getAll();
+//		for (it = elem.begin(); it != elem.end(); ++it)
+//		{
+//			f << *it;
+//		}
+//		f.close();
+//	}
+//
+//template<class T>
+//RepositoryFile<T>::~RepositoryFile()
+//{
+//
+//}
+//
+//template<class T>
+//int RepositoryFile<T>::addElem(const T& e) {
+//	int r= RepositoryTemplate::addElem(e);
+//	if (r != 0) {
+//		saveToFile();
+//		return 1;
+//	}
+//	return 0;
+//}
+//
+//template<class T>
+//int RepositoryFile<T>::deleteElem(const T& e) {
+//	int r = RepositoryTemplate::deleteElem(e);
+//	if (r != 0) {
 //		return 0;
+//		saveToFile();
 //	}
-//	return -1;
+//	else
+//		return -1;
 //}
-//
-//Car RepositoryFile::getItemFromPos(int i) {
-//	if (elem.size() > i)
-//	{
-//		std::list<Car>::iterator it = std::next(elem.begin(), i);
-//		return  *it;
-//	}
-//}
-//
-//list<Car> RepositoryFile::getAll()
+//template<class T>
+//void RepositoryFile<T>::updateElem(const T& e, const T n)
 //{
-//	return elem;
+//	RepositoryTemplate::updateElem(e, n);
+//	saveToFile();
 //}
-//
-//int RepositoryFile::getSize()
-//{
-//	return elem.size();
-//}
-//*/
