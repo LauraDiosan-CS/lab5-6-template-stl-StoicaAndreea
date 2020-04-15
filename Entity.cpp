@@ -119,6 +119,25 @@ bool Car::operator==(const Car& e){
 	return false;
 }
 
+void Car::fromString(std::string info) {
+	int i1 = info.length() - 1, i2 = info.length() - 1;
+	while (info[i1] != ' ')
+		i1--;
+	this->setStatus(info.substr(i1 + 1, i2 - i1 + 1).c_str());
+	i1--;
+	i2 = i1;
+	while (info[i1] != ' ')
+		i1--;
+	this->setNumar(info.substr(i1 + 1, i2 - i1).c_str());
+	i1--;
+	i2 = i1;
+	while (info[i1] != ' ')
+		i1--;
+	this->setName(info.substr(i1 + 1, i2 - i1).c_str());
+	//i2 = i1;
+	//i2--;
+	//i1 = 0;
+}
 bool Car::operator<(const Car& e) {
 	return (strcmp(this->name, e.name)<0);
 }

@@ -1,23 +1,3 @@
-//#pragma once
-//#include"Entity.h"
-//#include<list>
-//#include<iterator>
-//using namespace std;
-//
-//class RepositorySTL {
-//protected:
-//	list<Car> elem;
-//public:
-//	RepositorySTL();
-//	void addElem(Car);
-//	int findElem(Car);
-//	int deleteElem(Car);
-//	void updateElem(Car, const char*, const char*, const char*);
-//	Car getItemFromPos(int);
-//	list<Car>getAll();
-//	int getSize();
-//	~RepositorySTL();
-//};
 #pragma once
 #include"Entity.h"
 #include<iterator>
@@ -76,16 +56,16 @@ template<class T>
 int RepositoryTemplate<T>::findElem(const T& e)
 {
 	typename list<T>::iterator it;
-		int i = 0;
-		for (it = elem.begin(); it != elem.end(); ++it)
+	int i = 0;
+	for (it = elem.begin(); it != elem.end(); ++it)
+	{
+		if (*it == e)
 		{
-			if (*it == e)
-			{
-				return i;
-			}
-			i++;
+			return i;
 		}
-		return -1;
+		i++;
+	}
+	return -1;
 }
 
 template<class T>

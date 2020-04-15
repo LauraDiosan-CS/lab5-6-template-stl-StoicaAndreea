@@ -1,8 +1,5 @@
-﻿  App.cpp
-  Service.cpp
-  Tests.cpp
+﻿  Entity.cpp
+  RepoFile.cpp
   UI.cpp
   Generating Code...
-C:\Users\Andreea\source\repos\lab 6-7\lab 6-7\RepoTemplate.h(123): warning C4715: 'RepositoryTemplate<Car>::getItemFromPos': not all control paths return a value
-C:\Users\Andreea\source\repos\lab 6-7\lab 6-7\RepoTemplate.h(123): warning C4715: 'RepositoryTemplate<Car>::getItemFromPos': not all control paths return a value
   lab 6-7.vcxproj -> C:\Users\Andreea\source\repos\lab 6-7\Debug\lab 6-7.exe

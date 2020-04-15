@@ -21,6 +21,7 @@ public:
 	void setNumar(const char*);
 	void setStatus(const char*);
 
+	void fromString(std::string);
 	bool operator ==(const Car&);
 	bool operator <(const Car&);
 	
